@@ -48,6 +48,10 @@ public:
         connect(
             m_slider, SIGNAL(valueChanged(int)),
             m_gl_widget, SLOT(setJointAngle(int)));
+            
+        // Create another joint slider
+        n_slider = create_joint_angle_slider(
+		"FrankJoint", GLWidget::FRANK_MIN, GLWidget::FRANK_MAX);
 
         //////////////////////////////////////////////////////
         // TODO: Add additional joint sliders here
@@ -91,6 +95,9 @@ private:
     QPushButton *m_quit_button;
     QSlider *m_slider;
     QVBoxLayout *m_main_layout;
+    
+    // Declare a new slider
+    QSlider *n_slider;
 };
 
 #endif

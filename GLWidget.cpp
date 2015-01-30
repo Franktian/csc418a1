@@ -172,6 +172,8 @@ void GLWidget::paintGL()
     // once you done with your draw and tranlate, you do a pop matrix
     // and you are done with the shape. And it looks like it does not
     // other shapes when doing popMatrix()
+    // One thing to note that how many matrices you pushed first, must
+    // be same as how many pops you will do
     // Scale
     transformStack().scale(100.0f, 100.0f);
     // Move to what ever

@@ -129,6 +129,7 @@ void GLWidget::paintGL()
 
     // Push the current transformation matrix on the stack
     transformStack().pushMatrix();
+    transformStack().pushMatrix();
 
         // Draw the 'body'
         transformStack().pushMatrix();
@@ -161,6 +162,25 @@ void GLWidget::paintGL()
 	m_unit_square.draw();
 
     // Retrieve the previous state of the transformation stack
+    transformStack().popMatrix();
+    
+    // From what I've tried here, it looks like that if you would like
+    // to draw & manipulate an single square first, you first do a push
+    // matrix, do your rotations&translations stuff, and then you pop it
+    // so it comes to me that, the number of matrices being pushed to
+    // this stack corresponds to the number of shapes being rendered
+    // once you done with your draw and tranlate, you do a pop matrix
+    // and you are done with the shape. And it looks like it does not
+    // other shapes when doing popMatrix()
+    // Scale
+    transformStack().scale(100.0f, 100.0f);
+    // Move to what ever
+    transformStack().translate(0.0, 2.5);
+    // Set color
+    m_gl_state.setColor(1.0, 0.0, 0.0);
+    // Draw another unit square
+    m_unit_square.draw();
+    // Retrieve matrix transformations
     transformStack().popMatrix();
 
 

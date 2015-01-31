@@ -46,10 +46,12 @@ void GLWidget::initializeGL()
 
     // Copy the data for the shapes we'll draw into the video card's memory.
     m_unit_square.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
-    penguin_body.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
     m_unit_circle.initialize(
 	m_gl_state.VERTEX_POSITION_SHADER_LOCATION,
 	/*num_circle_segments=*/100);
+
+	// Initializations for other shapes
+	penguin_arm.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
 
     // Tell OpenGL what color to fill the background to when clearing.
     glClearColor(/*red=*/0.7f, /*green=*/0.7f, /*blue=*/0.9f, /*alpha=*/1.0f);
@@ -132,8 +134,6 @@ void GLWidget::paintGL()
     transformStack().pushMatrix();
     transformStack().pushMatrix();
 	transformStack().pushMatrix();
-	transformStack().pushMatrix();
-	//transformStack().pushMatrix();
 
 	// Draw the 'body'
 	// Scale square to size of body
@@ -170,28 +170,12 @@ void GLWidget::paintGL()
     // One thing to note that how many matrices you pushed first, must
     // be same as how many pops you will do
     // Scale
-    transformStack().scale(100.0f, 100.0f);
-    // Move to what ever
-    transformStack().translate(0.0, 2.5);
-    // Set color
-    m_gl_state.setColor(1.0, 0.0, 0.0);
-    // Draw another unit square
-    m_unit_square.draw();
-    // Retrieve matrix transformations
-    transformStack().popMatrix();  // POP three
     
-    // Try to draw a circle here
-    //transformStack().scale(50.0f, 50.0f);
-    //transformStack().translate(0.0, -2.5);
-    //m_gl_state.setColor(1.0, 0.0, 0.0);
-    //m_unit_circle.draw();
-    //transformStack().popMatrix();
-    
-    // Draw the penguin body here
-    transformStack().scale(50.0f, 50.0f);
+    // Draw the penguin arm
+    transformStack().scale(50.0f, 100.0f);
     transformStack().translate(0.0, -2.5);
     m_gl_state.setColor(1.0, 0.0, 0.0);
-    penguin_body.draw();
+    penguin_arm.draw();
     transformStack().popMatrix();
 
     // Execute any GL functions that are in the queue just to be safe

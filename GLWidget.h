@@ -16,6 +16,43 @@
 #include "GLShape.h"
 #include <QtOpenGL/QtOpenGL>
 
+
+// Penguin Body
+// The basic principles are similar with the unit square, except this
+// time we need to add two extra triangles
+class PenguinBody : public GLShape
+{
+public:
+    using GLShape::initialize;
+
+    void initialize(int shader_input_location)
+    {
+	// Use two triangles to create the square.
+        GLfloat square_vertices[][2] =
+        {
+            { -0.5, -0.5 },  // Triangle 1
+            {  0.5, -0.5 },
+            {  0.5,  0.5 },
+            { -0.5, -0.5 },  // Triangle 2
+            {  0.5,  0.5 },
+            { -0.5,  0.5 },
+            { -0.8, -0.2 },  // Triangle 3
+            { -0.5, -0.5 },
+            { -0.5,  0.5 },
+            {  0.5,  0.5 },  // Triangle 4
+            {  0.5, -0.5 },
+            {  0.8, -0.2 },
+        };
+
+        initialize(
+	    shader_input_location,
+            reinterpret_cast<const GLfloat *>(square_vertices),
+            /*num_vertices=*/12,
+	    GL_TRIANGLES); // Each group of three coordinates is a triangle
+    }
+};
+
+
 // Penguin Arm
 // This class represents the arm of the penguin
 // Note the difference between this shape and unit square is that
@@ -173,6 +210,7 @@ private:
 
     // Self defined parameters
     PenguinArm penguin_arm;
+    PenguinBody penguin_body;
     //////////////////////////////////////////////////////////////////////////
     // TODO: Add additional joint parameters.
     //////////////////////////////////////////////////////////////////////////

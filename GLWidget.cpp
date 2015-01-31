@@ -130,39 +130,32 @@ void GLWidget::paintGL()
     // Push the current transformation matrix on the stack
     transformStack().pushMatrix();
     transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
 
-        // Draw the 'body'
-        transformStack().pushMatrix();
-            // Scale square to size of body
-            transformStack().scale(BODY_WIDTH, BODY_LENGTH);
-
-            // Set the colour to green
-            m_gl_state.setColor(0.0, 1.0, 0.0);
-
-            // Draw the square for the body
-	    m_unit_square.draw();
-        transformStack().popMatrix();
-
-        // Draw the 'arm'
-
-        // Move the arm to the joint hinge
-        transformStack().translate(0.0, -BODY_LENGTH/2 + ARM_WIDTH);
-
-        // Rotate along the hinge
-        transformStack().rotateInDegrees(m_joint_angle);
-
-        // Scale the size of the arm
-        transformStack().scale(ARM_WIDTH, ARM_LENGTH);
-
-        // Move to center location of arm, under previous rotation
-        transformStack().translate(0.0, -0.5);
-
-        // Draw the square for the arm
-        m_gl_state.setColor(1.0, 0.0, 0.0);
+	// Draw the 'body'
+	// Scale square to size of body
+	transformStack().scale(BODY_WIDTH, BODY_LENGTH);
+	// Set the colour to green
+	m_gl_state.setColor(0.0, 1.0, 0.0);
+	// Draw the square for the body
 	m_unit_square.draw();
+	transformStack().popMatrix(); // POP one
 
+	// Draw the 'arm'
+	// Move the arm to the joint hinge
+	transformStack().translate(0.0, -BODY_LENGTH/2 + ARM_WIDTH);
+	// Rotate along the hinge
+	transformStack().rotateInDegrees(m_joint_angle);
+	// Scale the size of the arm
+	transformStack().scale(ARM_WIDTH, ARM_LENGTH);
+	// Move to center location of arm, under previous rotation
+	transformStack().translate(0.0, -0.5);
+	// Draw the square for the arm
+	m_gl_state.setColor(1.0, 0.0, 0.0);
+	m_unit_square.draw();
     // Retrieve the previous state of the transformation stack
-    transformStack().popMatrix();
+    transformStack().popMatrix(); // POP two
     
     // From what I've tried here, it looks like that if you would like
     // to draw & manipulate an single square first, you first do a push
@@ -183,6 +176,13 @@ void GLWidget::paintGL()
     // Draw another unit square
     m_unit_square.draw();
     // Retrieve matrix transformations
+    transformStack().popMatrix();  // POP three
+    
+    // Try to draw a circle here
+    transformStack().scale(50.0f, 50.0f);
+    transformStack().translate(0.0, -2.5);
+    m_gl_state.setColor(1.0, 0.0, 0.0);
+    m_unit_circle.draw();
     transformStack().popMatrix();
 
 

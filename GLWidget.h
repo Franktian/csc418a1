@@ -16,6 +16,33 @@
 #include "GLShape.h"
 #include <QtOpenGL/QtOpenGL>
 
+// Penguin Body
+class Body : public GLShape
+{
+public:
+    using GLShape::initialize;
+
+    void initialize(int shader_input_location)
+    {
+	// Use two triangles to create the square.
+        GLfloat square_vertices[][2] =
+        {
+            { -0.25, -0.5 },  // Triangle 1
+            {  0.25, -0.5 },
+            {  0.5,  0.5 },
+            { -0.25, -0.5 },  // Triangle 2
+            {  0.5,  0.5 },
+            { -0.5,  0.5 },
+        };
+
+        initialize(
+	    shader_input_location,
+            reinterpret_cast<const GLfloat *>(square_vertices),
+            /*num_vertices=*/6,
+	    GL_TRIANGLES); // Each group of three coordinates is a triangle
+    }
+};
+
 // Before transformed, this class displays a unit square centered at the
 // origin.
 class UnitSquare : public GLShape
@@ -140,6 +167,7 @@ private:
     int m_animation_frame;
     UnitSquare m_unit_square;
     UnitCircle m_unit_circle;
+    Body penguin_body;
     //////////////////////////////////////////////////////////////////////////
     // TODO: Add additional joint parameters.
     //////////////////////////////////////////////////////////////////////////

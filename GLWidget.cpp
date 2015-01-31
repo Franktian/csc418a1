@@ -46,6 +46,7 @@ void GLWidget::initializeGL()
 
     // Copy the data for the shapes we'll draw into the video card's memory.
     m_unit_square.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
+    penguin_body.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
     m_unit_circle.initialize(
 	m_gl_state.VERTEX_POSITION_SHADER_LOCATION,
 	/*num_circle_segments=*/100);
@@ -132,6 +133,7 @@ void GLWidget::paintGL()
     transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
+	//transformStack().pushMatrix();
 
 	// Draw the 'body'
 	// Scale square to size of body
@@ -179,12 +181,18 @@ void GLWidget::paintGL()
     transformStack().popMatrix();  // POP three
     
     // Try to draw a circle here
+    //transformStack().scale(50.0f, 50.0f);
+    //transformStack().translate(0.0, -2.5);
+    //m_gl_state.setColor(1.0, 0.0, 0.0);
+    //m_unit_circle.draw();
+    //transformStack().popMatrix();
+    
+    // Draw the penguin body here
     transformStack().scale(50.0f, 50.0f);
     transformStack().translate(0.0, -2.5);
     m_gl_state.setColor(1.0, 0.0, 0.0);
-    m_unit_circle.draw();
+    penguin_body.draw();
     transformStack().popMatrix();
-
 
     // Execute any GL functions that are in the queue just to be safe
     glFlush();

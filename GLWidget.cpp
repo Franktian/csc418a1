@@ -54,6 +54,7 @@ void GLWidget::initializeGL()
 	penguin_arm.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
 	penguin_body.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
 	penguin_head.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
+	penguin_beak.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
 
     // Tell OpenGL what color to fill the background to when clearing.
     glClearColor(/*red=*/0.7f, /*green=*/0.7f, /*blue=*/0.9f, /*alpha=*/1.0f);
@@ -138,6 +139,9 @@ void GLWidget::paintGL()
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
 
 	// Draw the 'body'
 	// Scale square to size of body
@@ -201,6 +205,20 @@ void GLWidget::paintGL()
     transformStack().translate(22.0, 18.0);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    // Draw the penguin beak
+    transformStack().scale(30.0f, 5.0f);
+    transformStack().translate(4.0f, 22.0f);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    penguin_beak.draw();	
+    transformStack().popMatrix();
+    
+    transformStack().scale(30.0f, 5.0f);
+    transformStack().translate(4.0f, 20.5f);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    m_unit_square.draw();	
+    transformStack().popMatrix();
 
     // Execute any GL functions that are in the queue just to be safe
     glFlush();

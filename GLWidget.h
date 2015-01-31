@@ -16,6 +16,32 @@
 #include "GLShape.h"
 #include <QtOpenGL/QtOpenGL>
 
+// Penguin Beak
+class PenguinBeak : public GLShape
+{
+public:
+    using GLShape::initialize;
+
+    void initialize(int shader_input_location)
+    {
+	// Use two triangles to create the square.
+        GLfloat square_vertices[][2] =
+        {
+            { -0.5, -0.5 },  // Triangle 1
+            {  0.5, -0.5 },
+            {  -0.5, 0.5 },
+            { -0.5,  0.5 },  // Triangle 2
+            {  0.5, -0.5 },
+            {  0.5,  1   },
+        };
+
+        initialize(
+	    shader_input_location,
+            reinterpret_cast<const GLfloat *>(square_vertices),
+            /*num_vertices=*/6,
+	    GL_TRIANGLES); // Each group of three coordinates is a triangle
+    }
+};
 
 // Penguin Arm
 // The basic principles are similar with the unit square, except this
@@ -244,6 +270,7 @@ private:
     PenguinArm penguin_arm;
     PenguinBody penguin_body;
     PenguinHead penguin_head;
+    PenguinBeak penguin_beak;
     //////////////////////////////////////////////////////////////////////////
     // TODO: Add additional joint parameters.
     //////////////////////////////////////////////////////////////////////////

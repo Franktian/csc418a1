@@ -16,8 +16,11 @@
 #include "GLShape.h"
 #include <QtOpenGL/QtOpenGL>
 
-// Penguin Body
-class Body : public GLShape
+// Penguin Arm
+// This class represents the arm of the penguin
+// Note the difference between this shape and unit square is that
+// the bottom edge is half the width of top edge
+class PenguinArm : public GLShape
 {
 public:
     using GLShape::initialize;
@@ -167,7 +170,9 @@ private:
     int m_animation_frame;
     UnitSquare m_unit_square;
     UnitCircle m_unit_circle;
-    Body penguin_body;
+
+    // Self defined parameters
+    PenguinArm penguin_arm;
     //////////////////////////////////////////////////////////////////////////
     // TODO: Add additional joint parameters.
     //////////////////////////////////////////////////////////////////////////

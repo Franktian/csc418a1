@@ -97,6 +97,7 @@ void GLWidget::timerEvent(QTimerEvent *)
     //   Note: Nothing should be drawn in this function!
     //////////////////////////////////////////////////////////////////////////
     arm_joint_angle = joint_rot_t * ARM_MIN + (1 - joint_rot_t) * ARM_MAX;
+    beak_joint_distance = joint_rot_t * BEAK_MIN + (1 - joint_rot_t) * BEAK_MAX;
 
     // Tell this widget to redraw itself.
     update();
@@ -218,7 +219,8 @@ void GLWidget::paintGL()
     m_gl_state.setColor(0.0, 0.0, 0.0);
     penguin_beak.draw();	
     transformStack().popMatrix();
-    
+
+    transformStack().translate(0.0, beak_joint_distance);
     transformStack().scale(30.0f, 5.0f);
     transformStack().translate(4.0f, 20.5f);
     m_gl_state.setColor(0.0, 0.0, 0.0);

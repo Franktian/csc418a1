@@ -96,6 +96,7 @@ void GLWidget::timerEvent(QTimerEvent *)
     //   Modify this function to animate the character's joints
     //   Note: Nothing should be drawn in this function!
     //////////////////////////////////////////////////////////////////////////
+    arm_joint_angle = joint_rot_t * ARM_MIN + (1 - joint_rot_t) * ARM_MAX;
 
     // Tell this widget to redraw itself.
     update();

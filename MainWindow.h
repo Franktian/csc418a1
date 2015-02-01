@@ -55,7 +55,7 @@ public:
         
         // Create arm joint slider
         arm_slider = create_joint_angle_slider(
-		"ArmJoint", GLWidget::FRANK_MIN, GLWidget::FRANK_MAX);
+		"ArmJoint", GLWidget::ARM_MIN, GLWidget::ARM_MAX);
 		connect(
             arm_slider, SIGNAL(valueChanged(int)),
             m_gl_widget, SLOT(setArmJointAngle(int)));

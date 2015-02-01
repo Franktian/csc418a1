@@ -240,6 +240,12 @@ public slots:
         // Call update() to trigger a redraw.
         update();
     }
+    
+    void setArmJointAngle(int angle)
+    {
+		arm_joint_angle = angle;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -275,6 +281,7 @@ private:
     // TODO: Add additional joint parameters.
     //////////////////////////////////////////////////////////////////////////
     double m_joint_angle;
+    double arm_joint_angle;
 };
 
 #endif

@@ -55,10 +55,10 @@ public:
         
         // Create arm joint slider
         arm_slider = create_joint_angle_slider(
-		"ArmJoint", GLWidget::JOINT_MIN, GLWidget::JOINT_MAX);
+		"ArmJoint", GLWidget::FRANK_MIN, GLWidget::FRANK_MAX);
 		connect(
             arm_slider, SIGNAL(valueChanged(int)),
-            m_gl_widget, SLOT(setJointAngle(int)));
+            m_gl_widget, SLOT(setArmJointAngle(int)));
 
         m_main_layout->addWidget(m_animate_checkbox);
         m_main_layout->addWidget(m_quit_button);

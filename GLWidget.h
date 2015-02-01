@@ -221,8 +221,8 @@ public:
     static const int JOINT_MAX = 45;
     
     // Other ranges
-    static const int FRANK_MIN = -90;
-    static const int FRANK_MAX = 90;
+    static const int ARM_MIN = -90;
+    static const int ARM_MAX = 90;
 
     GLWidget(QWidget *parent=NULL);
 

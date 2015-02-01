@@ -174,11 +174,11 @@ void GLWidget::paintGL()
     // this stack corresponds to the number of shapes being rendered
     // once you done with your draw and tranlate, you do a pop matrix
     // and you are done with the shape. And it looks like it does not
-    // other shapes when doing popMatrix()
+    // affect other shapes when doing popMatrix()
     // One thing to note that how many matrices you pushed first, must
-    // be same as how many pops you will do
+    // be same as how many pops you will do(well this might not be true)
+
     // Scale
-    
     // Draw the penguin body
     transformStack().scale(90.0f, 200.0f);
     transformStack().translate(2.0, 0.0);

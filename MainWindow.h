@@ -48,14 +48,17 @@ public:
         connect(
             m_slider, SIGNAL(valueChanged(int)),
             m_gl_widget, SLOT(setJointAngle(int)));
-            
-        // Create another joint slider
-        n_slider = create_joint_angle_slider(
-		"FrankJoint", GLWidget::FRANK_MIN, GLWidget::FRANK_MAX);
 
         //////////////////////////////////////////////////////
         // TODO: Add additional joint sliders here
         //////////////////////////////////////////////////////
+        
+        // Create arm joint slider
+        arm_slider = create_joint_angle_slider(
+		"ArmJoint", GLWidget::JOINT_MIN, GLWidget::JOINT_MAX);
+		connect(
+            arm_slider, SIGNAL(valueChanged(int)),
+            m_gl_widget, SLOT(setJointAngle(int)));
 
         m_main_layout->addWidget(m_animate_checkbox);
         m_main_layout->addWidget(m_quit_button);
@@ -95,9 +98,9 @@ private:
     QPushButton *m_quit_button;
     QSlider *m_slider;
     QVBoxLayout *m_main_layout;
-    
-    // Declare a new slider
-    QSlider *n_slider;
+
+    // New parameter definitions
+    QSlider *arm_slider;
 };
 
 #endif

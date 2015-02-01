@@ -59,12 +59,21 @@ public:
 		connect(
             arm_slider, SIGNAL(valueChanged(int)),
             m_gl_widget, SLOT(setArmJointAngle(int)));
+            
+        // Create beak joint slider
+        beak_slider = create_joint_angle_slider(
+        "BeakJoint", GLWidget::BEAK_MIN, GLWidget::BEAK_MAX);
+        connect(
+            beak_slider, SIGNAL(valueChanged(int)),
+            m_gl_widget, SLOT(setBeakJointDistance(int)));
 
         m_main_layout->addWidget(m_animate_checkbox);
         m_main_layout->addWidget(m_quit_button);
         setLayout(m_main_layout);
 
         m_slider->setValue(0);
+        arm_slider->setValue(0);
+        beak_slider->setValue(0);
         setWindowTitle("CSC418/2504 Assignment 1");
     }
 
@@ -101,6 +110,7 @@ private:
 
     // New parameter definitions
     QSlider *arm_slider;
+    QSlider *beak_slider;
 };
 
 #endif

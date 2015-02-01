@@ -223,6 +223,9 @@ public:
     // Other ranges
     static const int ARM_MIN = -90;
     static const int ARM_MAX = 90;
+    
+    static const int BEAK_MIN = 0;
+    static const int BEAK_MAX = 3;
 
     GLWidget(QWidget *parent=NULL);
 
@@ -244,6 +247,12 @@ public slots:
     void setArmJointAngle(int angle)
     {
 		arm_joint_angle = angle;
+		update();
+	}
+	
+	void setBeakJointDistance(int distance)
+	{
+		beak_joint_distance = distance;
 		update();
 	}
 
@@ -282,6 +291,7 @@ private:
     //////////////////////////////////////////////////////////////////////////
     double m_joint_angle;
     double arm_joint_angle;
+    double beak_joint_distance;
 };
 
 #endif

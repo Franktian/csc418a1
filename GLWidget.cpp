@@ -46,10 +46,15 @@ void GLWidget::initializeGL()
 
     // Copy the data for the shapes we'll draw into the video card's memory.
     m_unit_square.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
-    penguin_body.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
     m_unit_circle.initialize(
 	m_gl_state.VERTEX_POSITION_SHADER_LOCATION,
 	/*num_circle_segments=*/100);
+
+	// Initializations for other shapes
+	penguin_arm.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
+	penguin_body.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
+	penguin_head.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
+	penguin_beak.initialize(m_gl_state.VERTEX_POSITION_SHADER_LOCATION);
 
     // Tell OpenGL what color to fill the background to when clearing.
     glClearColor(/*red=*/0.7f, /*green=*/0.7f, /*blue=*/0.9f, /*alpha=*/1.0f);
@@ -133,7 +138,10 @@ void GLWidget::paintGL()
     transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
-	//transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
 
 	// Draw the 'body'
 	// Scale square to size of body
@@ -166,32 +174,54 @@ void GLWidget::paintGL()
     // this stack corresponds to the number of shapes being rendered
     // once you done with your draw and tranlate, you do a pop matrix
     // and you are done with the shape. And it looks like it does not
-    // other shapes when doing popMatrix()
+    // affect other shapes when doing popMatrix()
     // One thing to note that how many matrices you pushed first, must
-    // be same as how many pops you will do
+    // be same as how many pops you will do(well this might not be true)
+
     // Scale
-    transformStack().scale(100.0f, 100.0f);
-    // Move to what ever
-    transformStack().translate(0.0, 2.5);
-    // Set color
-    m_gl_state.setColor(1.0, 0.0, 0.0);
-    // Draw another unit square
-    m_unit_square.draw();
-    // Retrieve matrix transformations
-    transformStack().popMatrix();  // POP three
-    
-    // Try to draw a circle here
-    //transformStack().scale(50.0f, 50.0f);
-    //transformStack().translate(0.0, -2.5);
-    //m_gl_state.setColor(1.0, 0.0, 0.0);
-    //m_unit_circle.draw();
-    //transformStack().popMatrix();
-    
-    // Draw the penguin body here
-    transformStack().scale(50.0f, 50.0f);
-    transformStack().translate(0.0, -2.5);
-    m_gl_state.setColor(1.0, 0.0, 0.0);
+    // Draw the penguin body
+    transformStack().scale(90.0f, 200.0f);
+    transformStack().translate(2.0, 0.0);
+    m_gl_state.setColor(0.0, 0.0, 1.0);
     penguin_body.draw();
+    transformStack().popMatrix();
+    
+    // Draw the penguin head
+    transformStack().scale(90.0f, 45.0f);
+    transformStack().translate(2.0, 2.7);
+    m_gl_state.setColor(1.0, 1.0, 1.0);
+    penguin_head.draw();
+    transformStack().popMatrix();
+    
+	// Draw the penguin arm
+	// This is how you connect the shape to the joint, now need to
+	// figure out how to move the joint to different locations
+	transformStack().translate(180.0, 50.0);
+	transformStack().rotateInDegrees(arm_joint_angle);
+    transformStack().scale(50.0f, 100.0f);
+    transformStack().translate(0.0, -0.5);// move the hinge
+    m_gl_state.setColor(1.0, 0.0, 0.0);
+    penguin_arm.draw();
+    transformStack().popMatrix();
+    
+    // Draw the penguin eye
+    transformStack().scale(7.0f, 7.0f);
+    transformStack().translate(22.0, 18.0);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    // Draw the penguin beak
+    transformStack().scale(30.0f, 5.0f);
+    transformStack().translate(4.0f, 22.0f);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    penguin_beak.draw();	
+    transformStack().popMatrix();
+    
+    transformStack().scale(30.0f, 5.0f);
+    transformStack().translate(4.0f, 20.5f);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    m_unit_square.draw();	
     transformStack().popMatrix();
 
     // Execute any GL functions that are in the queue just to be safe

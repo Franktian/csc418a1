@@ -16,8 +16,106 @@
 #include "GLShape.h"
 #include <QtOpenGL/QtOpenGL>
 
+// Penguin Beak
+class PenguinBeak : public GLShape
+{
+public:
+    using GLShape::initialize;
+
+    void initialize(int shader_input_location)
+    {
+	// Use two triangles to create the square.
+        GLfloat square_vertices[][2] =
+        {
+            { -0.5, -0.5 },  // Triangle 1
+            {  0.5, -0.5 },
+            {  -0.5, 0.5 },
+            { -0.5,  0.5 },  // Triangle 2
+            {  0.5, -0.5 },
+            {  0.5,  1   },
+        };
+
+        initialize(
+	    shader_input_location,
+            reinterpret_cast<const GLfloat *>(square_vertices),
+            /*num_vertices=*/6,
+	    GL_TRIANGLES); // Each group of three coordinates is a triangle
+    }
+};
+
+// Penguin Arm
+// The basic principles are similar with the unit square, except this
+// time we need to one two extra triangle
+class PenguinHead : public GLShape
+{
+public:
+    using GLShape::initialize;
+
+    void initialize(int shader_input_location)
+    {
+	// Use two triangles to create the square.
+        GLfloat square_vertices[][2] =
+        {
+            { -0.5, -0.5 },  // Triangle 1
+            {  0.5, -0.5 },
+            { 0.45,  0.5 },
+            { -0.5, -0.5 },  // Triangle 2
+            { 0.45,  0.5 },
+            {-0.45,  0.5 },
+            {-0.45,  0.5 },  // Triangle 3
+            { 0.45,  0.5 },
+            {    0,  0.7 },
+        };
+
+        initialize(
+	    shader_input_location,
+            reinterpret_cast<const GLfloat *>(square_vertices),
+            /*num_vertices=*/9,
+	    GL_TRIANGLES); // Each group of three coordinates is a triangle
+    }
+};
+
 // Penguin Body
-class Body : public GLShape
+// The basic principles are similar with the unit square, except this
+// time we need to add two extra triangles
+class PenguinBody : public GLShape
+{
+public:
+    using GLShape::initialize;
+
+    void initialize(int shader_input_location)
+    {
+	// Use two triangles to create the square.
+        GLfloat square_vertices[][2] =
+        {
+            { -0.5, -0.5 },  // Triangle 1
+            {  0.5, -0.5 },
+            {  0.5,  0.5 },
+            { -0.5, -0.5 },  // Triangle 2
+            {  0.5,  0.5 },
+            { -0.5,  0.5 },
+            { -0.8, -0.2 },  // Triangle 3
+            { -0.5, -0.5 },
+            { -0.5,  0.5 },
+            {  0.5,  0.5 },  // Triangle 4
+            {  0.5, -0.5 },
+            {  0.8, -0.2 },
+        };
+
+        initialize(
+	    shader_input_location,
+            reinterpret_cast<const GLfloat *>(square_vertices),
+            /*num_vertices=*/12,
+	    GL_TRIANGLES); // Each group of three coordinates is a triangle
+    }
+};
+
+
+// Penguin Arm
+// This class represents the arm of the penguin
+// Note the difference between this shape and unit square is that
+// the bottom edge is half the width of top edge
+class PenguinArm : public GLShape
 {
 public:
     using GLShape::initialize;
@@ -142,6 +240,12 @@ public slots:
         // Call update() to trigger a redraw.
         update();
     }
+    
+    void setArmJointAngle(int angle)
+    {
+		arm_joint_angle = angle;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -167,11 +271,17 @@ private:
     int m_animation_frame;
     UnitSquare m_unit_square;
     UnitCircle m_unit_circle;
-    Body penguin_body;
+
+    // Self defined parameters
+    PenguinArm penguin_arm;
+    PenguinBody penguin_body;
+    PenguinHead penguin_head;
+    PenguinBeak penguin_beak;
     //////////////////////////////////////////////////////////////////////////
     // TODO: Add additional joint parameters.
     //////////////////////////////////////////////////////////////////////////
     double m_joint_angle;
+    double arm_joint_angle;
 };
 
 #endif

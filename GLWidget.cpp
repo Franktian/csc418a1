@@ -198,7 +198,7 @@ void GLWidget::paintGL()
 	// figure out how to move the joint to different locations
 	transformStack().rotateInDegrees(m_joint_angle);
     transformStack().scale(50.0f, 100.0f);
-    transformStack().translate(3.6, 0.0);
+    transformStack().translate(0.0, -0.5);// move the hinge
     m_gl_state.setColor(1.0, 0.0, 0.0);
     penguin_arm.draw();
     transformStack().popMatrix();

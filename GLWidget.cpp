@@ -196,6 +196,7 @@ void GLWidget::paintGL()
 	// Draw the penguin arm
 	// This is how you connect the shape to the joint, now need to
 	// figure out how to move the joint to different locations
+	transformStack().translate(180.0, 50.0);
 	transformStack().rotateInDegrees(arm_joint_angle);
     transformStack().scale(50.0f, 100.0f);
     transformStack().translate(0.0, -0.5);// move the hinge

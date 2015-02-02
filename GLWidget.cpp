@@ -180,14 +180,14 @@ void GLWidget::paintGL()
     // Scale
     // Draw the penguin body
     transformStack().scale(90.0f, 200.0f);
-    transformStack().translate(2.0, 0.0);
+    // transformStack().translate(0.0, 0.0);
     m_gl_state.setColor(0.0, 0.0, 1.0);
     penguin_body.draw();
     transformStack().popMatrix();
     
     // Draw the penguin head
     transformStack().scale(90.0f, 45.0f);
-    transformStack().translate(2.0, 2.7);
+    transformStack().translate(0.0, 2.7);
     m_gl_state.setColor(1.0, 1.0, 1.0);
     penguin_head.draw();
     transformStack().popMatrix();
@@ -195,7 +195,7 @@ void GLWidget::paintGL()
 	// Draw the penguin arm
 	// This is how you connect the shape to the joint, now need to
 	// figure out how to move the joint to different locations
-	transformStack().translate(180.0, 50.0);
+	transformStack().translate(0.0, 50.0);
 	transformStack().rotateInDegrees(arm_joint_angle);
     transformStack().scale(50.0f, 100.0f);
     transformStack().translate(0.0, -0.5);// move the hinge
@@ -205,21 +205,21 @@ void GLWidget::paintGL()
     
     // Draw the penguin eye
     transformStack().scale(7.0f, 7.0f);
-    transformStack().translate(22.0, 18.0);
+    transformStack().translate(0.0, 18.0);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     m_unit_circle.draw();
     transformStack().popMatrix();
     
     // Draw the penguin beak
     transformStack().scale(30.0f, 5.0f);
-    transformStack().translate(4.0f, 22.0f);
+    transformStack().translate(-2.0, 22.0);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     penguin_beak.draw();	
     transformStack().popMatrix();
 
     transformStack().translate(0.0, beak_joint_distance);
     transformStack().scale(30.0f, 5.0f);
-    transformStack().translate(4.0f, 20.5f);
+    transformStack().translate(-2.0, 20.5);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     m_unit_square.draw();	
     transformStack().popMatrix();

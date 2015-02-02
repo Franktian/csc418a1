@@ -279,6 +279,12 @@ public slots:
 		right_lower_angle = angle;
 		update();
 	}
+	
+	void setHeadJointAngle(int angle)
+	{
+		head_joint_angle = angle;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -320,6 +326,7 @@ private:
     double left_lower_angle;
     double right_leg_angle;
     double right_lower_angle;
+    double head_joint_angle;
 };
 
 #endif

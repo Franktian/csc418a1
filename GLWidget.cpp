@@ -98,6 +98,7 @@ void GLWidget::timerEvent(QTimerEvent *)
     arm_joint_angle = joint_rot_t * ARM_MIN + (1 - joint_rot_t) * ARM_MAX;
     beak_joint_distance = joint_rot_t * BEAK_MIN + (1 - joint_rot_t) * BEAK_MAX;
     left_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    left_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     right_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     right_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
 
@@ -140,6 +141,7 @@ void GLWidget::paintGL()
     // Push the current transformation matrix on the stack
     transformStack().pushMatrix();
     transformStack().pushMatrix();
+	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
@@ -251,6 +253,16 @@ void GLWidget::paintGL()
     transformStack().rotateInDegrees(right_leg_angle);
     transformStack().translate(0.0, -70.0);
     transformStack().rotateInDegrees(right_lower_angle);
+    transformStack().scale(20.0f, 100.0f);
+    transformStack().translate(0.0, -0.5);
+    m_gl_state.setColor(1.0, 1.0, 1.0);
+    m_unit_square.draw();	
+    transformStack().popMatrix();
+    
+    transformStack().translate(-25.0, -70.0);
+    transformStack().rotateInDegrees(left_leg_angle);
+    transformStack().translate(0.0, -70.0);
+    transformStack().rotateInDegrees(left_lower_angle);
     transformStack().scale(20.0f, 100.0f);
     transformStack().translate(0.0, -0.5);
     m_gl_state.setColor(1.0, 1.0, 1.0);

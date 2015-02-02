@@ -89,7 +89,6 @@ void GLWidget::timerEvent(QTimerEvent *)
     const double joint_rot_speed = 0.1;
     double joint_rot_t =
         (sin(m_animation_frame * joint_rot_speed) + 1.0) / 2.0;
-    m_joint_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
 
     //////////////////////////////////////////////////////////////////////////
     // TODO:
@@ -126,10 +125,10 @@ void GLWidget::paintGL()
     //////////////////////////////////////////////////////////////////////////
 
     // Draw our hinged object
-    const float BODY_WIDTH = 60.0f;
-    const float BODY_LENGTH = 100.0f;
-    const float ARM_LENGTH = 100.0f;
-    const float ARM_WIDTH = 20.0f;
+    // const float BODY_WIDTH = 60.0f;
+    // const float BODY_LENGTH = 100.0f;
+    // const float ARM_LENGTH = 100.0f;
+    // const float ARM_WIDTH = 20.0f;
 
 
     // Note that successive transformations are applied *before* the previous
@@ -142,32 +141,30 @@ void GLWidget::paintGL()
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
-	transformStack().pushMatrix();
-	transformStack().pushMatrix();
 
 	// Draw the 'body'
 	// Scale square to size of body
-	transformStack().scale(BODY_WIDTH, BODY_LENGTH);
+	// transformStack().scale(BODY_WIDTH, BODY_LENGTH);
 	// Set the colour to green
-	m_gl_state.setColor(0.0, 1.0, 0.0);
+	// m_gl_state.setColor(0.0, 1.0, 0.0);
 	// Draw the square for the body
-	m_unit_square.draw();
-	transformStack().popMatrix(); // POP one
+	// m_unit_square.draw();
+	// transformStack().popMatrix(); // POP one
 
 	// Draw the 'arm'
 	// Move the arm to the joint hinge
-	transformStack().translate(0.0, -BODY_LENGTH/2 + ARM_WIDTH);
+	// transformStack().translate(0.0, -BODY_LENGTH/2 + ARM_WIDTH);
 	// Rotate along the hinge
-	transformStack().rotateInDegrees(m_joint_angle);
+	// transformStack().rotateInDegrees(m_joint_angle);
 	// Scale the size of the arm
-	transformStack().scale(ARM_WIDTH, ARM_LENGTH);
+	// transformStack().scale(ARM_WIDTH, ARM_LENGTH);
 	// Move to center location of arm, under previous rotation
-	transformStack().translate(0.0, -0.5);
+	// transformStack().translate(0.0, -0.5);
 	// Draw the square for the arm
-	m_gl_state.setColor(1.0, 0.0, 0.0);
-	m_unit_square.draw();
+	// m_gl_state.setColor(1.0, 0.0, 0.0);
+	// m_unit_square.draw();
     // Retrieve the previous state of the transformation stack
-    transformStack().popMatrix(); // POP two
+    // transformStack().popMatrix(); // POP two
     
     // From what I've tried here, it looks like that if you would like
     // to draw & manipulate an single square first, you first do a push

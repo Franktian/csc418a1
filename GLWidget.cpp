@@ -99,6 +99,7 @@ void GLWidget::timerEvent(QTimerEvent *)
     beak_joint_distance = joint_rot_t * BEAK_MIN + (1 - joint_rot_t) * BEAK_MAX;
     left_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     right_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    right_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
 
     // Tell this widget to redraw itself.
     update();

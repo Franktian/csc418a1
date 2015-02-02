@@ -201,7 +201,7 @@ public:
         initialize(
 	    shader_input_location,
             &circle_vertices[0],
-            num_circle_segments + 1,
+            num_circle_segments + 2,
 	    GL_TRIANGLE_FAN);
     }
 };

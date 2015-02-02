@@ -69,8 +69,8 @@ public:
         right_leg_slider = create_joint_angle_slider(
         "RightLegJoint", GLWidget::JOINT_MIN, GLWidget::JOINT_MAX);
         connect(
-            left_leg_slider, SIGNAL(valueChanged(int)),
-            m_gl_widget, SLOT(setLeftLegJointAngle(int)));
+            right_leg_slider, SIGNAL(valueChanged(int)),
+            m_gl_widget, SLOT(setRightLegJointAngle(int)));
 
         m_main_layout->addWidget(m_animate_checkbox);
         m_main_layout->addWidget(m_quit_button);

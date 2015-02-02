@@ -41,14 +41,6 @@ public:
         m_main_layout = new QVBoxLayout();
         m_main_layout->addWidget(m_gl_widget);
 
-        // Create a slider to control the joint angle, and make it call
-        // GLWidget::setJointAngle when the slider value changes.
-        m_slider = create_joint_angle_slider(
-	    "Joint", GLWidget::JOINT_MIN, GLWidget::JOINT_MAX);
-        connect(
-            m_slider, SIGNAL(valueChanged(int)),
-            m_gl_widget, SLOT(setJointAngle(int)));
-
         //////////////////////////////////////////////////////
         // TODO: Add additional joint sliders here
         //////////////////////////////////////////////////////
@@ -71,7 +63,6 @@ public:
         m_main_layout->addWidget(m_quit_button);
         setLayout(m_main_layout);
 
-        m_slider->setValue(0);
         arm_slider->setValue(0);
         beak_slider->setValue(0);
         setWindowTitle("CSC418/2504 Assignment 1");
@@ -105,7 +96,6 @@ private:
     GLWidget *m_gl_widget;
     QCheckBox *m_animate_checkbox;
     QPushButton *m_quit_button;
-    QSlider *m_slider;
     QVBoxLayout *m_main_layout;
 
     // New parameter definitions

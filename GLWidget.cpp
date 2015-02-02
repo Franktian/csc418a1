@@ -97,6 +97,10 @@ void GLWidget::timerEvent(QTimerEvent *)
     //////////////////////////////////////////////////////////////////////////
     arm_joint_angle = joint_rot_t * ARM_MIN + (1 - joint_rot_t) * ARM_MAX;
     beak_joint_distance = joint_rot_t * BEAK_MIN + (1 - joint_rot_t) * BEAK_MAX;
+    left_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    left_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    right_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    right_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
 
     // Tell this widget to redraw itself.
     update();
@@ -137,6 +141,10 @@ void GLWidget::paintGL()
     // Push the current transformation matrix on the stack
     transformStack().pushMatrix();
     transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
+	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
@@ -221,6 +229,43 @@ void GLWidget::paintGL()
     transformStack().scale(30.0f, 5.0f);
     transformStack().translate(-2.0, 20.5);
     m_gl_state.setColor(0.0, 0.0, 0.0);
+    m_unit_square.draw();	
+    transformStack().popMatrix();
+    
+    // Draw the penguin legs
+    transformStack().translate(-25.0, -70.0);
+    transformStack().rotateInDegrees(left_leg_angle);
+    transformStack().scale(20.0f, 100.0f);
+    transformStack().translate(0.0, -0.5);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    m_unit_square.draw();	
+    transformStack().popMatrix();
+    
+    transformStack().translate(25.0, -70.0);
+    transformStack().rotateInDegrees(right_leg_angle);
+    transformStack().scale(20.0f, 100.0f);
+    transformStack().translate(0.0, -0.5);
+    m_gl_state.setColor(0.0, 0.0, 0.0);
+    m_unit_square.draw();	
+    transformStack().popMatrix();
+    
+    transformStack().translate(25.0, -70.0);
+    transformStack().rotateInDegrees(right_leg_angle);
+    transformStack().translate(0.0, -70.0);
+    transformStack().rotateInDegrees(right_lower_angle);
+    transformStack().scale(20.0f, 100.0f);
+    transformStack().translate(0.0, -0.5);
+    m_gl_state.setColor(1.0, 1.0, 1.0);
+    m_unit_square.draw();	
+    transformStack().popMatrix();
+    
+    transformStack().translate(-25.0, -70.0);
+    transformStack().rotateInDegrees(left_leg_angle);
+    transformStack().translate(0.0, -70.0);
+    transformStack().rotateInDegrees(left_lower_angle);
+    transformStack().scale(20.0f, 100.0f);
+    transformStack().translate(0.0, -0.5);
+    m_gl_state.setColor(1.0, 1.0, 1.0);
     m_unit_square.draw();	
     transformStack().popMatrix();
 

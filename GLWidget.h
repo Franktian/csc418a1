@@ -201,7 +201,7 @@ public:
         initialize(
 	    shader_input_location,
             &circle_vertices[0],
-            num_circle_segments + 1,
+            num_circle_segments + 2,
 	    GL_TRIANGLE_FAN);
     }
 };
@@ -255,6 +255,30 @@ public slots:
 		beak_joint_distance = distance;
 		update();
 	}
+	
+	void setLeftLegJointAngle(int angle)
+	{
+		left_leg_angle = angle;
+		update();
+	}
+	
+	void setLeftLowerLegJointAngle(int angle)
+	{
+		left_lower_angle = angle;
+		update();
+	}
+	
+	void setRightLegJointAngle(int angle)
+	{
+		right_leg_angle = angle;
+		update();
+	}
+	
+	void setRightLowerLegJointAngle(int angle)
+	{
+		right_lower_angle = angle;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -292,6 +316,10 @@ private:
     double m_joint_angle;
     double arm_joint_angle;
     double beak_joint_distance;
+    double left_leg_angle;
+    double left_lower_angle;
+    double right_leg_angle;
+    double right_lower_angle;
 };
 
 #endif

@@ -141,6 +141,8 @@ void GLWidget::paintGL()
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
 	transformStack().pushMatrix();
+	//transformStack().pushMatrix();
+	//transformStack().pushMatrix();
 
 	// Draw the 'body'
 	// Scale square to size of body
@@ -223,6 +225,9 @@ void GLWidget::paintGL()
     m_gl_state.setColor(0.0, 0.0, 0.0);
     m_unit_square.draw();	
     transformStack().popMatrix();
+    
+    // Draw the penguin legs
+    //transformStack().popMatrix();
 
     // Execute any GL functions that are in the queue just to be safe
     glFlush();

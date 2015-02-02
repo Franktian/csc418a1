@@ -255,6 +255,18 @@ public slots:
 		beak_joint_distance = distance;
 		update();
 	}
+	
+	void setLeftLegJointAngle(int angle)
+	{
+		left_leg_angle = angle;
+		update();
+	}
+	
+	void setRightLegJointAngle(int angle)
+	{
+		right_leg_angle = angle;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -292,6 +304,8 @@ private:
     double m_joint_angle;
     double arm_joint_angle;
     double beak_joint_distance;
+    double left_leg_angle;
+    double right_leg_angle;
 };
 
 #endif

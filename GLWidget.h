@@ -262,9 +262,21 @@ public slots:
 		update();
 	}
 	
+	void setLeftLowerLegJointAngle(int angle)
+	{
+		left_lower_angle = angle;
+		update();
+	}
+	
 	void setRightLegJointAngle(int angle)
 	{
 		right_leg_angle = angle;
+		update();
+	}
+	
+	void setRightLowerLegJointAngle(int angle)
+	{
+		right_lower_angle = angle;
 		update();
 	}
 
@@ -305,7 +317,9 @@ private:
     double arm_joint_angle;
     double beak_joint_distance;
     double left_leg_angle;
+    double left_lower_angle;
     double right_leg_angle;
+    double right_lower_angle;
 };
 
 #endif

@@ -248,8 +248,10 @@ void GLWidget::paintGL()
     
     transformStack().translate(25.0, -70.0);
     transformStack().rotateInDegrees(right_leg_angle);
+    transformStack().translate(0.0, -70.0);
+    transformStack().rotateInDegrees(right_lower_angle);
     transformStack().scale(20.0f, 100.0f);
-    transformStack().translate(0.0, -1.5);
+    transformStack().translate(0.0, -0.5);
     m_gl_state.setColor(1.0, 1.0, 1.0);
     m_unit_square.draw();	
     transformStack().popMatrix();

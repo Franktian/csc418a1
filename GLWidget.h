@@ -229,6 +229,9 @@ public:
     
     static const int HORIZONTAL_MIN = -10;
     static const int HORIZONTAL_MAX = 10;
+    
+    static const int VERTICAL_MIN = -20;
+    static const int VERTICAL_MAX = 20;
 
     GLWidget(QWidget *parent=NULL);
 
@@ -294,6 +297,12 @@ public slots:
 		horizontal_distance = distance;
 		update();
 	}
+	
+	void setVerticalDistance(int distance)
+	{
+		vertical_distance = distance;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -320,7 +329,7 @@ private:
     UnitSquare m_unit_square;
     UnitCircle m_unit_circle;
 
-    // Self defined parameters
+    // Self defined shape parameters
     PenguinArm penguin_arm;
     PenguinBody penguin_body;
     PenguinHead penguin_head;
@@ -337,6 +346,7 @@ private:
     double right_lower_angle;
     double head_joint_angle;
     double horizontal_distance;
+    double vertical_distance;
 };
 
 #endif

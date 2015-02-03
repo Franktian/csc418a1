@@ -97,6 +97,13 @@ public:
         connect(
             horizontal_slider, SIGNAL(valueChanged(int)),
             m_gl_widget, SLOT(setHorizontalDistance(int)));
+            
+        // Create vertical joint slider
+        vertical_slider = create_joint_angle_slider(
+        "VerticalJoint", GLWidget::VERTICAL_MIN, GLWidget::VERTICAL_MAX);
+        connect(
+            vertical_slider, SIGNAL(valueChanged(int)),
+            m_gl_widget, SLOT(setVerticalDistance(int)));
 
         m_main_layout->addWidget(m_animate_checkbox);
         m_main_layout->addWidget(m_quit_button);
@@ -110,6 +117,7 @@ public:
         right_lower_slider->setValue(0);
         head_slider->setValue(0);
         horizontal_slider->setValue(0);
+        vertical_slider->setValue(0);
         setWindowTitle("CSC418/2504 Assignment 1");
     }
 
@@ -152,6 +160,7 @@ private:
     QSlider *right_lower_slider;
     QSlider *head_slider;
     QSlider *horizontal_slider;
+    QSlider *vertical_slider;
 };
 
 #endif

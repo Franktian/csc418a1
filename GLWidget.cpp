@@ -102,6 +102,7 @@ void GLWidget::timerEvent(QTimerEvent *)
     right_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     right_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     head_joint_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    horizontal_distance = joint_rot_t * HORIZONTAL_MIN + (1 - joint_rot_t) * HORIZONTAL_MAX;
 
     // Tell this widget to redraw itself.
     update();
@@ -188,12 +189,14 @@ void GLWidget::paintGL()
 
     // Scale
     // Draw the penguin body
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().scale(90.0f, 200.0f);
     m_gl_state.setColor(0.0, 0.0, 1.0);
     penguin_body.draw();
     transformStack().popMatrix();
     
     // Draw the penguin head
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(0.0, 100.0);
     transformStack().rotateInDegrees(head_joint_angle);
     transformStack().scale(90.0f, 45.0f);
@@ -205,6 +208,7 @@ void GLWidget::paintGL()
 	// Draw the penguin arm
 	// This is how you connect the shape to the joint, now need to
 	// figure out how to move the joint to different locations
+	transformStack().translate(horizontal_distance, 0.0);
 	transformStack().translate(0.0, 50.0);
 	transformStack().rotateInDegrees(arm_joint_angle);
     transformStack().scale(50.0f, 100.0f);
@@ -214,6 +218,7 @@ void GLWidget::paintGL()
     transformStack().popMatrix();
     
     // Draw the penguin eye
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(0.0, 100.0);
     transformStack().rotateInDegrees(head_joint_angle);
     transformStack().scale(7.0f, 7.0f);
@@ -223,6 +228,7 @@ void GLWidget::paintGL()
     transformStack().popMatrix();
     
     // Draw the penguin beak
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(0.0, 100.0);
     transformStack().rotateInDegrees(head_joint_angle);
     transformStack().scale(30.0f, 5.0f);
@@ -231,6 +237,7 @@ void GLWidget::paintGL()
     penguin_beak.draw();	
     transformStack().popMatrix();
 	
+	transformStack().translate(horizontal_distance, 0.0);
 	transformStack().translate(0.0, 100.0);
     transformStack().rotateInDegrees(head_joint_angle);
     transformStack().translate(0.0, beak_joint_distance);
@@ -241,6 +248,7 @@ void GLWidget::paintGL()
     transformStack().popMatrix();
     
     // Draw the penguin legs
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(-25.0, -70.0);
     transformStack().rotateInDegrees(left_leg_angle);
     transformStack().scale(20.0f, 100.0f);
@@ -249,6 +257,7 @@ void GLWidget::paintGL()
     m_unit_square.draw();	
     transformStack().popMatrix();
     
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(25.0, -70.0);
     transformStack().rotateInDegrees(right_leg_angle);
     transformStack().scale(20.0f, 100.0f);
@@ -257,6 +266,7 @@ void GLWidget::paintGL()
     m_unit_square.draw();	
     transformStack().popMatrix();
     
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(25.0, -70.0);
     transformStack().rotateInDegrees(right_leg_angle);
     transformStack().translate(0.0, -70.0);
@@ -267,6 +277,7 @@ void GLWidget::paintGL()
     m_unit_square.draw();	
     transformStack().popMatrix();
     
+    transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(-25.0, -70.0);
     transformStack().rotateInDegrees(left_leg_angle);
     transformStack().translate(0.0, -70.0);

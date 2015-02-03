@@ -226,6 +226,9 @@ public:
     
     static const int BEAK_MIN = 0;
     static const int BEAK_MAX = 5;
+    
+    static const int HORIZONTAL_MIN = -10;
+    static const int HORIZONTAL_MAX = 10;
 
     GLWidget(QWidget *parent=NULL);
 
@@ -285,6 +288,12 @@ public slots:
 		head_joint_angle = angle;
 		update();
 	}
+	
+	void setHorizontalDistance(int distance)
+	{
+		horizontal_distance = distance;
+		update();
+	}
 
     void onPressAnimate(int is_animating)
     {
@@ -327,6 +336,7 @@ private:
     double right_leg_angle;
     double right_lower_angle;
     double head_joint_angle;
+    double horizontal_distance;
 };
 
 #endif

@@ -83,6 +83,13 @@ public:
         connect(
             right_lower_slider, SIGNAL(valueChanged(int)),
             m_gl_widget, SLOT(setRightLowerLegJointAngle(int)));
+        
+        // Create head joint slider
+        head_slider = create_joint_angle_slider(
+        "HeadJoint", GLWidget::JOINT_MIN, GLWidget::JOINT_MAX);
+        connect(
+            head_slider, SIGNAL(valueChanged(int)),
+            m_gl_widget, SLOT(setHeadJointAngle(int)));
 
         m_main_layout->addWidget(m_animate_checkbox);
         m_main_layout->addWidget(m_quit_button);
@@ -94,6 +101,7 @@ public:
         left_lower_slider->setValue(0);
         right_leg_slider->setValue(0);
         right_lower_slider->setValue(0);
+        head_slider->setValue(0);
         setWindowTitle("CSC418/2504 Assignment 1");
     }
 
@@ -134,6 +142,7 @@ private:
     QSlider *left_lower_slider;
     QSlider *right_leg_slider;
     QSlider *right_lower_slider;
+    QSlider *head_slider;
 };
 
 #endif

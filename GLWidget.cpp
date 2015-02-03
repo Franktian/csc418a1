@@ -101,6 +101,7 @@ void GLWidget::timerEvent(QTimerEvent *)
     left_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     right_leg_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
     right_lower_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
+    head_joint_angle = joint_rot_t * JOINT_MIN + (1 - joint_rot_t) * JOINT_MAX;
 
     // Tell this widget to redraw itself.
     update();
@@ -188,14 +189,15 @@ void GLWidget::paintGL()
     // Scale
     // Draw the penguin body
     transformStack().scale(90.0f, 200.0f);
-    // transformStack().translate(0.0, 0.0);
     m_gl_state.setColor(0.0, 0.0, 1.0);
     penguin_body.draw();
     transformStack().popMatrix();
     
     // Draw the penguin head
+    transformStack().translate(0.0, 100.0);
+    transformStack().rotateInDegrees(head_joint_angle);
     transformStack().scale(90.0f, 45.0f);
-    transformStack().translate(0.0, 2.7);
+    transformStack().translate(0.0, 0.5);
     m_gl_state.setColor(1.0, 1.0, 1.0);
     penguin_head.draw();
     transformStack().popMatrix();
@@ -212,22 +214,28 @@ void GLWidget::paintGL()
     transformStack().popMatrix();
     
     // Draw the penguin eye
+    transformStack().translate(0.0, 100.0);
+    transformStack().rotateInDegrees(head_joint_angle);
     transformStack().scale(7.0f, 7.0f);
-    transformStack().translate(0.0, 18.0);
+    transformStack().translate(0.0, 4.0);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     m_unit_circle.draw();
     transformStack().popMatrix();
     
     // Draw the penguin beak
+    transformStack().translate(0.0, 100.0);
+    transformStack().rotateInDegrees(head_joint_angle);
     transformStack().scale(30.0f, 5.0f);
-    transformStack().translate(-2.0, 22.0);
+    transformStack().translate(-2.0, 2.0);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     penguin_beak.draw();	
     transformStack().popMatrix();
-
+	
+	transformStack().translate(0.0, 100.0);
+    transformStack().rotateInDegrees(head_joint_angle);
     transformStack().translate(0.0, beak_joint_distance);
     transformStack().scale(30.0f, 5.0f);
-    transformStack().translate(-2.0, 20.5);
+    transformStack().translate(-2.0, 0.5);
     m_gl_state.setColor(0.0, 0.0, 0.0);
     m_unit_square.draw();	
     transformStack().popMatrix();

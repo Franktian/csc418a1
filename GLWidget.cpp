@@ -237,9 +237,11 @@ void GLWidget::paintGL()
     penguin_beak.draw();	
     transformStack().popMatrix();
 	
+	// Draw the moving beak
 	transformStack().translate(horizontal_distance, 0.0);
 	transformStack().translate(0.0, 100.0);
     transformStack().rotateInDegrees(head_joint_angle);
+    // Connect to the joint that controls open/close
     transformStack().translate(0.0, beak_joint_distance);
     transformStack().scale(30.0f, 5.0f);
     transformStack().translate(-2.0, 0.5);
@@ -248,6 +250,8 @@ void GLWidget::paintGL()
     transformStack().popMatrix();
     
     // Draw the penguin legs
+    
+    // left upper leg
     transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(-25.0, -70.0);
     transformStack().rotateInDegrees(left_leg_angle);
@@ -257,6 +261,7 @@ void GLWidget::paintGL()
     m_unit_square.draw();	
     transformStack().popMatrix();
     
+    // right upper leg
     transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(25.0, -70.0);
     transformStack().rotateInDegrees(right_leg_angle);
@@ -266,6 +271,7 @@ void GLWidget::paintGL()
     m_unit_square.draw();	
     transformStack().popMatrix();
     
+    // right lower leg
     transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(25.0, -70.0);
     transformStack().rotateInDegrees(right_leg_angle);
@@ -277,6 +283,7 @@ void GLWidget::paintGL()
     m_unit_square.draw();	
     transformStack().popMatrix();
     
+    // left lower leg
     transformStack().translate(horizontal_distance, 0.0);
     transformStack().translate(-25.0, -70.0);
     transformStack().rotateInDegrees(left_leg_angle);

@@ -225,7 +225,7 @@ public:
     static const int ARM_MAX = 90;
     
     static const int BEAK_MIN = 0;
-    static const int BEAK_MAX = 3;
+    static const int BEAK_MAX = 5;
 
     GLWidget(QWidget *parent=NULL);
 

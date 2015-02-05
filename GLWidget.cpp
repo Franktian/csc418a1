@@ -296,8 +296,65 @@ void GLWidget::paintGL()
     transformStack().rotateInDegrees(-90);
     transformStack().scale(20.0f, 80.0f);
     transformStack().translate(0.0, -0.5);
-    m_gl_state.setColor(1.0, 1.0, 1.0);
+    m_gl_state.setColor(0.7, 0.7, 0.7);
     m_unit_square.draw();	
+    transformStack().popMatrix();
+    
+    // Draw small circles
+    
+    // Arm joint position
+    transformStack().pushMatrix();
+		transformStack().translate(horizontal_distance, vertical_distance);
+		transformStack().translate(0.0, 50.0);
+		transformStack().scale(3.0f, 3.0f);
+		m_gl_state.setColor(0.5, 0.5, 0.5);
+		m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    // Legs joint positions
+    transformStack().pushMatrix();
+		transformStack().translate(horizontal_distance, vertical_distance);
+		transformStack().translate(-25.0, -70.0);
+		transformStack().scale(3.0f, 3.0f);
+		m_gl_state.setColor(0.5, 0.5, 0.5);
+		m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    transformStack().pushMatrix();
+		transformStack().translate(horizontal_distance, vertical_distance);
+		transformStack().translate(25.0, -70.0);
+		transformStack().scale(3.0f, 3.0f);
+		m_gl_state.setColor(0.5, 0.5, 0.5);
+		m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    transformStack().pushMatrix();
+		transformStack().translate(horizontal_distance, vertical_distance);
+		transformStack().translate(-25.0, -70.0);
+		transformStack().rotateInDegrees(left_leg_angle);
+		transformStack().translate(0.0, -70.0);
+		transformStack().scale(3.0f, 3.0f);
+		m_gl_state.setColor(0.5, 0.5, 0.5);
+		m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    transformStack().pushMatrix();
+		transformStack().translate(horizontal_distance, vertical_distance);
+		transformStack().translate(25.0, -70.0);
+		transformStack().rotateInDegrees(right_leg_angle);
+		transformStack().translate(0.0, -70.0);
+		transformStack().scale(3.0f, 3.0f);
+		m_gl_state.setColor(0.5, 0.5, 0.5);
+		m_unit_circle.draw();
+    transformStack().popMatrix();
+    
+    // head joint position
+    transformStack().pushMatrix();
+		transformStack().translate(horizontal_distance, vertical_distance);
+		transformStack().translate(0.0, 100.0);
+		transformStack().scale(3.0f, 3.0f);
+		m_gl_state.setColor(0.5, 0.5, 0.5);
+		m_unit_circle.draw();
     transformStack().popMatrix();
 
     // Execute any GL functions that are in the queue just to be safe

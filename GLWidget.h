@@ -43,7 +43,7 @@ public:
     }
 };
 
-// Penguin Arm
+// Penguin Head
 // The basic principles are similar with the unit square, except this
 // time we need to one two extra triangle
 class PenguinHead : public GLShape

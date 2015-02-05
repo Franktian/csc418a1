@@ -1,0 +1,64 @@
+There are nine unit shapes in total to form the penguin, among them
+there are four special shape classes created other than the unit circle
+and unit square for particular parts of the penguin:
+
+PenguinBeak - A four-corner polygon served as the upper part of the
+penguin beak
+
+PenguinHead - A five-corner polygon served as the penguin head
+
+PenguinArm - A four-corner polygon served as the arm of the penguin
+
+PenguinBody - A six-corner polygon served as the body of the penguin
+
+Other than the special fours. The eye, lower part of the beak, and legs
+are rendered directly from the unit square and unit circle.
+
+Nine joint sliders are created to control the nine degrees of freedom:
+
+- Joint for rotation the penguin arm
+- Joint for rotating the
+	- left upper leg
+	- left lower leg
+	- right upper leg
+	- right lower leg
+- Joint for translating the beak
+- Joint for rotating the head
+- Joint for moving the penguin
+	- horizontally
+	- vertically
+
+Corresponding to the nine sliders there are nine angles and distances
+created:
+    - m_joint_angle
+    - arm_joint_angle
+    - beak_joint_distance
+    - left_leg_angle
+    - left_lower_angle
+    - right_leg_angle
+    - right_lower_angle
+    - head_joint_angle
+    - horizontal_distance
+    - vertical_distance
+
+The most challenging part for animation is to make sure the translation
+of the lower beak renders correctly while the head is rotating. To make
+it happen, I need to first draw the whole head at the center, adjust the
+beak and eye to their relative position. And before define the rotateInDegrees()
+to the lower beak, first I need to define a dynamic vertically translation
+to the lower beak. And after this call is applied, then it will be good
+to translate the lower beak and apply a dynamic rotateInDegrees(). This
+is the key point to make sure the beak is translating correctly when head
+is rotating.
+
+From what I've learnt during tutorial, basic idea is that command from
+the stack applies to the whole coordinate system. And this principle guides
+me through the whole process of completing this assignment.
+
+And the final part is to move the penguin as a whole. This is achieved
+by applying
+
+transformStack().translate(horizontal_distance, vertical_distance);
+
+to each single shape, while the horizontal_distance and vertical_distance
+are two dynamic parameters controlled by two joint slider.
